@@ -36,8 +36,8 @@ const cols: { title: string; links: { label: string; href: string }[] }[] = [
 
 /* Only profiles with a real URL render. Fill in hrefs as accounts go live. */
 const socials: { label: string; icon: typeof Linkedin02Icon; href?: string }[] = [
-  { label: "LinkedIn", icon: Linkedin02Icon },
-  { label: "X", icon: NewTwitterIcon },
+  { label: "LinkedIn", icon: Linkedin02Icon, href: "https://www.linkedin.com/company/axiom-black/" },
+  { label: "X", icon: NewTwitterIcon, href: "https://x.com/Axiomblackco" },
   { label: "Instagram", icon: InstagramIcon },
 ];
 const liveSocials = socials.filter((s) => s.href);

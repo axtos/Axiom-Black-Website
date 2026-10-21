@@ -37,12 +37,12 @@ export default function PrivacyPage() {
         {
           heading: "Retention and your choices",
           body: [
-            "We keep enquiry emails for as long as needed to handle your request and for ordinary business records. To ask us to access, correct or delete your information, email hello@axiomblack.com.",
+            "We keep enquiry emails for as long as needed to handle your request and for ordinary business records. To ask us to access, correct or delete your information, email info@axiomblack.com.",
           ],
         },
         {
           heading: "Contact",
-          body: ["Axiom Black, LLC, 511 South Orange Ave #2238, Newark, NJ 07103 · hello@axiomblack.com"],
+          body: ["Axiom Black, LLC, 511 South Orange Ave #2238, Newark, NJ 07103 · info@axiomblack.com"],
         },
       ]}
     />

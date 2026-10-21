@@ -42,7 +42,7 @@ export default function TermsPage() {
         {
           heading: "Changes and contact",
           body: [
-            "We may update these terms; the date above shows the latest revision. Questions: hello@axiomblack.com.",
+            "We may update these terms; the date above shows the latest revision. Questions: info@axiomblack.com.",
           ],
         },
       ]}

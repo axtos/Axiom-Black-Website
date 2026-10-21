@@ -50,7 +50,7 @@ export async function submitContact(_prev: ContactState, data: FormData): Promis
       headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
       body: JSON.stringify({
         from: process.env.CONTACT_FROM_EMAIL ?? "Axiom Black Website <onboarding@resend.dev>",
-        to: [process.env.CONTACT_TO_EMAIL ?? "hello@axiomblack.com"],
+        to: [process.env.CONTACT_TO_EMAIL ?? "info@axiomblack.com"],
         reply_to: email,
         subject: `Website enquiry from ${fullName}, ${organization}`,
         html,

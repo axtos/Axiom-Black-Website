@@ -61,7 +61,7 @@ export default function ContactForm() {
       {state.status === "error" && (
         <p role="alert" className="text-[15px] text-ink">
           {state.message} Please try again, or email{" "}
-          <a href="mailto:hello@axiomblack.com" className="underline">hello@axiomblack.com</a>.
+          <a href="mailto:info@axiomblack.com" className="underline">info@axiomblack.com</a>.
         </p>
       )}
       <button type="submit" disabled={pending} className="ab-btn group disabled:opacity-60">
