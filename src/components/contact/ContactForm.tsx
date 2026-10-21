@@ -1,6 +1,7 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
+import { track } from "@vercel/analytics";
 import Icon from "@/components/ui/Icon";
 import { ArrowRight01Icon } from "@hugeicons/core-free-icons";
 import { submitContact, type ContactState } from "@/app/contact/actions";
@@ -13,6 +14,10 @@ const initial: ContactState = { status: "idle" };
 
 export default function ContactForm() {
   const [state, formAction, pending] = useActionState(submitContact, initial);
+
+  useEffect(() => {
+    if (state.status === "sent") track("contact_submitted");
+  }, [state.status]);
 
   if (state.status === "sent") {
     return (
