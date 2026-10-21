@@ -51,6 +51,8 @@ export type SolutionPage = {
   accent: Accent;
   hero: { eyebrow: string; headline: string; sub: string; primaryCta: { label: string; href: string }; secondaryCta: { label: string; href: string } };
   capabilities: { eyebrow: string; headline: string; sub: string; items: { title: string; body: string; icon: IconSvgElement }[] };
+  /** Optional full service list, shown as a plain definition list after the capability cards. */
+  services?: { eyebrow: string; headline: string; items: { title: string; body: string }[] };
   difference: { eyebrow: string; headline: string; sub: string; cta: { label: string; href: string } };
   process: { eyebrow: string; headline: string; steps: { n: string; title: string; body: string }[] };
   related: { eyebrow: string; headline: string; items: { name: string; href: string; descriptor: string }[] };
@@ -558,6 +560,23 @@ export const solutionPages: Record<string, SolutionPage> = {
         { title: "Funding & Grant Support", icon: MoneyReceive01Icon, body: "Application engineering and documentation for NJEIT (I-Bank) and USDA Rural Development funded projects." },
       ],
     },
+    services: {
+      eyebrow: "Service offerings",
+      headline: "Key areas of our water service.",
+      items: [
+        { title: "Asset Management", body: "Data-driven maintenance planning and lifecycle optimization for water infrastructure assets." },
+        { title: "GIS System Mapping", body: "Spatial analysis for accurate modeling, monitoring, and asset visualization." },
+        { title: "Lead Service Line Programs", body: "Planning, tracking, and replacement programs that keep residents safe and the utility compliant." },
+        { title: "Operation & Maintenance Manuals", body: "Custom O&M documentation and digital systems that improve efficiency and compliance." },
+        { title: "Pump Stations", body: "Design, automation, and optimization of pumping systems for municipal and industrial operations." },
+        { title: "Water Meter Automation", body: "Smart metering using IoT and analytics for accurate measurement and performance monitoring." },
+        { title: "As-Built Plans", body: "Precise record documentation for construction accuracy, maintenance planning, and regulatory verification." },
+        { title: "Site Improvements", body: "Engineering upgrades to existing water infrastructure that improve resilience and capacity." },
+        { title: "Well Design & Rehabilitation", body: "Design and rehabilitation of wells and groundwater systems, from siting to commissioning." },
+        { title: "Infiltration & Inflow Studies", body: "Flow monitoring and modeling to find where I&I enters the system and recover capacity." },
+        { title: "Construction Observation & Reporting", body: "Field oversight for compliance, safety, and quality control from design through delivery." },
+      ],
+    },
     difference: {
       eyebrow: "The Axiom Black difference",
       headline: "Water engineering with a data layer built in.",
@@ -579,7 +598,7 @@ export const solutionPages: Record<string, SolutionPage> = {
       headline: "Good design starts with good data.",
       items: [
         { name: "Modeling", href: "/solutions/modeling", descriptor: "Hydraulic modeling that validates capacity and sizing decisions before they're drawn." },
-        { name: "Water", href: "/solutions/water", descriptor: "Distribution, treatment, and lead service line programs on the drinking water side." },
+        { name: "Risk Assessment", href: "/solutions/risk-assessment", descriptor: "Asset condition and resilience analysis that sets your capital priorities." },
         { name: "Software Development", href: "/solutions/software-development", descriptor: "Custom dashboards and tools that turn your record drawings into living asset data." },
       ],
     },

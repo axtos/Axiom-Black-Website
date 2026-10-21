@@ -31,7 +31,7 @@ export default function SolutionsIndexPage() {
       <section className="pb-24 pt-16 md:pb-28 md:pt-20">
         <Container>
           {solutionGroups.map((group) => (
-            <div key={group.label} className="mb-16 last:mb-0">
+            <div key={group.label} id={group.label.toLowerCase()} className="mb-16 scroll-mt-28 last:mb-0">
               <p className="ab-eyebrow-caps">{group.label}</p>
               <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
                 {group.items.map((item) => (

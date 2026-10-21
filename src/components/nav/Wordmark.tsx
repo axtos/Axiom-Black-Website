@@ -6,7 +6,7 @@ export default function Wordmark({ className, height = 26 }: { className?: strin
   return (
     <Link href="/" aria-label="Axiom Black home" className={cn("inline-flex items-center", className)}>
       <Image
-        src="/logo-axiomblack.svg"
+        src="/logo-axiomblack-white.svg"
         alt="Axiom Black"
         width={(200 / 45) * height}
         height={height}

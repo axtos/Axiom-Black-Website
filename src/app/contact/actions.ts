@@ -2,7 +2,7 @@
 
 export type ContactState = { status: "idle" | "sent" | "error"; message?: string };
 
-const MAX = { name: 100, email: 200, org: 200, role: 200, message: 5000 };
+const MAX = { name: 100, email: 200, org: 200, role: 200, phone: 40, message: 5000 };
 
 const escapeHtml = (s: string) =>
   s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -20,10 +20,11 @@ export async function submitContact(_prev: ContactState, data: FormData): Promis
   const email = field(data, "email", MAX.email);
   const organization = field(data, "organization", MAX.org);
   const role = field(data, "role", MAX.role);
+  const phone = field(data, "phone", MAX.phone);
   const message = field(data, "message", MAX.message);
 
-  if (!firstName || !lastName || !organization || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return { status: "error", message: "Please fill in your name, organization and a valid work email." };
+  if (!firstName || !lastName || !organization || !role || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return { status: "error", message: "Please fill in your name, job title, organization and a valid work email." };
   }
 
   const apiKey = process.env.RESEND_API_KEY;
@@ -37,7 +38,8 @@ export async function submitContact(_prev: ContactState, data: FormData): Promis
     ["Name", fullName],
     ["Email", email],
     ["Organization", organization],
-    ["Role", role || "—"],
+    ["Job title", role],
+    ["Phone", phone || "—"],
   ];
   const html =
     `<table>${rows.map(([k, v]) => `<tr><td><b>${k}</b></td><td>${escapeHtml(v)}</td></tr>`).join("")}</table>` +

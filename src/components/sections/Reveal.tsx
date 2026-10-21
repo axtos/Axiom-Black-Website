@@ -1,17 +1,16 @@
-"use client";
-import { motion, useReducedMotion } from "framer-motion";
 import type { ReactNode } from "react";
+import { cn } from "@/lib/cn";
+
+/**
+ * Scroll-driven fade/lift in pure CSS (see `.ab-reveal` in globals.css). Content is
+ * visible by default: the animation only applies where the browser supports
+ * view timelines and the visitor allows motion, so crawlers, no-JS and
+ * reduced-motion visitors always see the section. `delay` staggers siblings.
+ */
 export default function Reveal({ children, delay = 0, className }: { children: ReactNode; delay?: number; className?: string }) {
-  const reduce = useReducedMotion();
   return (
-    <motion.div
-      className={className}
-      initial={reduce ? false : { opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
-    >
+    <div className={cn("ab-reveal", className)} style={delay ? { animationRangeStart: `entry ${Math.round(delay * 100)}%` } : undefined}>
       {children}
-    </motion.div>
+    </div>
   );
 }

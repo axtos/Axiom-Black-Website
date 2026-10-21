@@ -30,13 +30,15 @@ Aeonik is the licensed brand typeface. Self-host it in production: drop the
 `next/font/google` (DM Sans) to `next/font/local`. DM Sans is the sanctioned
 fallback until then.
 
+## Editing content
+
+All copy lives in `src/content/*.ts` as typed data: solutions, products, blog posts
+(`blog.ts`), careers (`careers.ts`), legal text (`legal.ts`). Add a blog post by appending
+to `posts`; it appears on /blog, the home page, the sitemap and gets Article JSON-LD.
+
 ## Status
 
-Phase 0 — Foundation scaffold: tokens, fonts, animation stack, redirects,
-token-check homepage. Next: component library + real Home (Phase 1).
-
-## Contact form
-
-Submissions are emailed through [Resend](https://resend.com) by a server action
-(`src/app/contact/actions.ts`). Copy `.env.example` to `.env.local` for local use and
-set the same variables in Vercel. Verify the sending domain in Resend before launch.
+Phase 0–1 done: black canvas per the brand guide, three-menu nav (Engineering ·
+Technology · Company), real content only, legal text carried over from Framer, SEO
+(sitemap, robots, llms.txt, OG image, JSON-LD). Deployed on Vercel project
+`axiom-black-website` (Axiom Black team). Build board tracks the rest.

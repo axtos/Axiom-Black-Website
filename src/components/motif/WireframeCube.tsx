@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { accentDot, type Accent } from "@/lib/brand";
+import type { Accent } from "@/lib/brand";
 import { cn } from "@/lib/cn";
 
 /**
@@ -64,7 +64,7 @@ export default function WireframeCube({
       ? "#ff8710"
       : accent === "green"
       ? "#12bb1e"
-      : "#dadada";
+      : "#ffffff";
 
   return (
     <svg
@@ -76,8 +76,8 @@ export default function WireframeCube({
     >
       <defs>
         <linearGradient id="ab-wire" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stopColor="#242424" />
-          <stop offset="1" stopColor="#3a3a3a" />
+          <stop offset="0" stopColor="#333333" />
+          <stop offset="1" stopColor="#5a5a5a" />
         </linearGradient>
       </defs>
       <g

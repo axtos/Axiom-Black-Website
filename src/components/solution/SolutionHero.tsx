@@ -1,11 +1,13 @@
+import WireframeCube from "@/components/motif/WireframeCube";
 import Container from "@/components/ui/Container";
 import Eyebrow from "@/components/ui/Eyebrow";
 import PrimaryButton from "@/components/ui/PrimaryButton";
 import SecondaryButton from "@/components/ui/SecondaryButton";
 import { DashboardSquare02Icon } from "@hugeicons/core-free-icons";
 import type { SolutionPage } from "@/content/solutionPages";
+import type { Accent } from "@/lib/brand";
 
-export default function SolutionHero({ hero }: { hero: SolutionPage["hero"] }) {
+export default function SolutionHero({ hero, accent }: { hero: SolutionPage["hero"]; accent: Accent }) {
   return (
     <section>
       <Container className="pt-[150px] md:pt-[190px]">
@@ -21,8 +23,8 @@ export default function SolutionHero({ hero }: { hero: SolutionPage["hero"] }) {
               <SecondaryButton href={hero.secondaryCta.href}>{hero.secondaryCta.label}</SecondaryButton>
             </div>
           </div>
-          <div className="flex aspect-square w-full items-center justify-center bg-[#767676] text-[13px] font-medium uppercase tracking-widest text-white/70">
-            Image placeholder
+          <div className="relative aspect-square w-full max-w-full">
+            <WireframeCube accent={accent} className="absolute inset-0 h-full w-full" />
           </div>
         </div>
       </Container>

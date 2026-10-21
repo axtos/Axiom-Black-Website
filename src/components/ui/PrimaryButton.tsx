@@ -15,8 +15,8 @@ export default function PrimaryButton({
   return (
     <Link href={href} className={cn("ab-btn group", className)}>
       <span>{children}</span>
-      <span className="inline-flex h-6 w-6 items-center justify-center rounded-none border border-white/40 rounded-[7px] transition-transform group-hover:translate-x-[2px]">
-        <Icon icon={ArrowRight01Icon} size={15} className="text-white" strokeWidth={2} />
+      <span className="inline-flex h-6 w-6 items-center justify-center rounded-none border border-black/25 rounded-[7px] transition-transform group-hover:translate-x-[2px]">
+        <Icon icon={ArrowRight01Icon} size={15} className="text-surface" strokeWidth={2} />
       </span>
     </Link>
   );

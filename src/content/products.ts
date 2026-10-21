@@ -346,26 +346,3 @@ export const labProjects: Record<string, LabProject> = {
     },
   },
 };
-
-/** Single source of truth for the Product dropdown, mobile nav, and footer. */
-export const productNav: {
-  name: string;
-  href: string;
-  descriptor: string;
-  icon: IconSvgElement;
-  status?: string;
-}[] = [
-  {
-    name: "Certificate Tracker",
-    href: "/products/certificate-tracker",
-    descriptor: "Track licences, certs, and compliance deadlines in one place",
-    icon: Certificate01Icon,
-  },
-  ...Object.values(labProjects).map((l) => ({
-    name: l.name,
-    href: `/products/${l.slug}`,
-    descriptor: l.descriptor,
-    icon: l.navIcon,
-    status: l.status,
-  })),
-];

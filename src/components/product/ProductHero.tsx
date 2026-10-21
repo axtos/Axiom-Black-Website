@@ -1,3 +1,4 @@
+import WireframeCube from "@/components/motif/WireframeCube";
 import Container from "@/components/ui/Container";
 import Eyebrow from "@/components/ui/Eyebrow";
 import PrimaryButton from "@/components/ui/PrimaryButton";
@@ -21,8 +22,8 @@ export default function ProductHero({ hero }: { hero: ProductPage["hero"] }) {
               <SecondaryButton href={hero.secondaryCta.href}>{hero.secondaryCta.label}</SecondaryButton>
             </div>
           </div>
-          <div className="flex aspect-[4/3] w-full items-center justify-center bg-[#767676] text-[13px] font-medium uppercase tracking-widest text-white/70">
-            App screenshot placeholder
+          <div className="relative aspect-[4/3] w-full max-w-full">
+            <WireframeCube accent={"orange"} className="absolute inset-0 h-full w-full" />
           </div>
         </div>
       </Container>

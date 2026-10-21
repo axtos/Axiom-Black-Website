@@ -2,36 +2,35 @@ import Link from "next/link";
 import { InstagramIcon, Linkedin02Icon, NewTwitterIcon } from "@hugeicons/core-free-icons";
 import Icon from "@/components/ui/Icon";
 import Wordmark from "@/components/nav/Wordmark";
-import { productNav } from "@/content/products";
+import { labProjects } from "@/content/products";
+import { solutionGroups } from "@/content/solutions";
+
+const [engineering, technology] = solutionGroups;
 
 const cols: { title: string; links: { label: string; href: string }[] }[] = [
+  { title: "Engineering", links: engineering.items.map((i) => ({ label: i.name, href: i.href })) },
   {
-    title: "Solutions",
-    links: [
-      { label: "Water", href: "/solutions/water" },
-      { label: "Design", href: "/solutions/design" },
-      { label: "Modeling", href: "/solutions/modeling" },
-      { label: "Risk Assessment", href: "/solutions/risk-assessment" },
-      { label: "AI & Machine Learning", href: "/solutions/ai-machine-learning" },
-      { label: "Digital Transformation", href: "/solutions/digital-transformation" },
-      { label: "Data Analytics & BI", href: "/solutions/data-analytics" },
-      { label: "Software Development", href: "/solutions/software-development" },
-    ],
-  },
-  {
-    title: "Products",
-    links: productNav.map((p) => ({ label: p.name, href: p.href })),
+    title: "Technology",
+    links: [...technology.items.map((i) => ({ label: i.name, href: i.href })), { label: "Certificate Tracker", href: "/products/certificate-tracker" }],
   },
   {
     title: "Company",
     links: [
       { label: "About", href: "/about" },
-      { label: "Career", href: "/careers" },
+      { label: "Careers", href: "/careers" },
       { label: "Blog", href: "/blog" },
-      { label: "Contact Us", href: "/contact" },
+      { label: "Contact", href: "/contact" },
     ],
   },
-  { title: "Legal", links: [{ label: "Privacy", href: "/privacy" }, { label: "Terms", href: "/terms" }] },
+  {
+    title: "AxiomLabs",
+    links: Object.values(labProjects).map((l) => ({ label: l.name, href: `/products/${l.slug}` })),
+  },
+];
+
+const legal = [
+  { label: "Privacy", href: "/privacy" },
+  { label: "Terms", href: "/terms" },
 ];
 
 /* Only profiles with a real URL render. Fill in hrefs as accounts go live. */
@@ -44,7 +43,7 @@ const liveSocials = socials.filter((s) => s.href);
 
 export default function Footer() {
   return (
-    <footer className="bg-surface-2">
+    <footer className="border-t border-line bg-surface-2">
       <div className="mx-auto w-full max-w-[1284px] px-6 pt-20 md:px-10 lg:px-14">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.5fr_repeat(4,1fr)]">
           {/* Brand column */}
@@ -66,7 +65,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={s.label}
-                  className="flex h-10 w-10 items-center justify-center rounded-none bg-white text-ink shadow-[0_1px_2px_rgba(0,0,0,0.04)] ring-1 ring-line transition-colors hover:bg-ink hover:text-white"
+                  className="flex h-10 w-10 items-center justify-center rounded-none bg-surface-2 text-ink shadow-[0_1px_2px_rgba(0,0,0,0.04)] ring-1 ring-line transition-colors hover:bg-ink hover:text-surface"
                 >
                   <Icon icon={s.icon} size={18} strokeWidth={1.8} />
                 </a>
@@ -92,11 +91,16 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-16 flex flex-col gap-4 border-t border-line py-7 text-[14px] text-body md:flex-row md:items-center md:justify-between">
-          <span>© Axiom Black, LLC 2026. All rights reserved.</span>
-          <span className="flex items-center gap-6 text-ink">
-            <span>Engineering</span>
-            <span>Technology</span>
-            <span>Consulting</span>
+          <span className="flex flex-wrap items-center gap-x-6 gap-y-2">
+            <span>© Axiom Black, LLC {new Date().getFullYear()}. All rights reserved.</span>
+            {legal.map((l) => (
+              <Link key={l.href} href={l.href} className="transition-colors hover:text-ink">{l.label}</Link>
+            ))}
+          </span>
+          <span className="flex items-center gap-6 font-semibold uppercase tracking-[0.14em] text-[12px]">
+            <span className="text-ab-blue">Engineering</span>
+            <span className="text-ab-orange">Technology</span>
+            <span className="text-ab-green">Consulting</span>
           </span>
         </div>
       </div>

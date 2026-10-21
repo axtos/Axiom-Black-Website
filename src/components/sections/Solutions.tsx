@@ -32,7 +32,7 @@ export default function Solutions() {
 
         <div className="mt-14">
           <p className="ab-eyebrow-caps">Technology</p>
-          <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {technologyCards.map((c, i) => (
               <Reveal key={c.href} delay={(i % 3) * 0.05}><SolutionCard {...c} /></Reveal>
             ))}

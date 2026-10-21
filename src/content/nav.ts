@@ -1,48 +1,64 @@
-import type { Accent } from "@/lib/brand";
+import {
+  Certificate01Icon,
+  UserGroupIcon,
+  Briefcase01Icon,
+  BookOpen01Icon,
+  Mail01Icon,
+} from "@hugeicons/core-free-icons";
+import type { IconSvgElement } from "@hugeicons/react";
+import { solutionGroups } from "./solutions";
 
-export type NavItem = { label: string; href: string };
-
-export type SolutionLink = {
-  name: string;
-  href: string;
-  descriptor: string;
-};
-
-export type SolutionGroup = {
+export type NavLink = { name: string; href: string; descriptor: string; icon: IconSvgElement };
+export type NavSection = { label?: string; links: NavLink[] };
+export type NavMenu = {
+  id: "engineering" | "technology" | "company";
   label: string;
-  accent: Accent;
-  items: SolutionLink[];
+  /** Discipline accent: Engineering blue, Technology orange, Company none (master brand). */
+  accent: "blue" | "orange" | "none";
+  sections: NavSection[];
+  /** Overview link shown at the foot of the menu. */
+  overview?: { label: string; href: string };
 };
 
-/** Solutions mega-menu taxonomy (brief §4.2). */
-export const solutionsMenu: SolutionGroup[] = [
+const [engineering, technology] = solutionGroups;
+
+/** Top navigation: the three sub-brands, each with its own drill-down. */
+export const navMenus: NavMenu[] = [
   {
+    id: "engineering",
     label: "Engineering",
     accent: "blue",
-    items: [
-      { name: "Water", href: "/solutions/water", descriptor: "Municipal water & wastewater infrastructure" },
-      { name: "Design", href: "/solutions/design", descriptor: "Civil and process engineering design" },
-      { name: "Modeling", href: "/solutions/modeling", descriptor: "Hydraulic and systems modeling" },
-      { name: "Risk Assessment", href: "/solutions/risk-assessment", descriptor: "Infrastructure risk & resilience analysis" },
-    ],
+    sections: [{ links: engineering.items }],
+    overview: { label: "All engineering solutions", href: "/solutions#engineering" },
   },
   {
+    id: "technology",
     label: "Technology",
     accent: "orange",
-    items: [
-      { name: "AI & Machine Learning", href: "/solutions/ai-machine-learning", descriptor: "Applied models for utility operations" },
-      { name: "Digital Transformation", href: "/solutions/digital-transformation", descriptor: "Modernizing agency workflows and data" },
-      { name: "Data Analytics & BI", href: "/solutions/data-analytics", descriptor: "Dashboards, reporting & decision support" },
-      { name: "Software Development", href: "/solutions/software-development", descriptor: "Custom tools for public-sector teams" },
+    sections: [
+      { label: "Solutions", links: technology.items },
+      {
+        label: "Products",
+        links: [
+          { name: "Certificate Tracker", href: "/products/certificate-tracker", descriptor: "Licences, certifications and permits with expiry alerts", icon: Certificate01Icon },
+        ],
+      },
+    ],
+    overview: { label: "All technology solutions", href: "/solutions#technology" },
+  },
+  {
+    id: "company",
+    label: "Company",
+    accent: "none",
+    sections: [
+      {
+        links: [
+          { name: "About", href: "/about", descriptor: "Our story and the GROW framework", icon: UserGroupIcon },
+          { name: "Careers", href: "/careers", descriptor: "Open roles and how we hire", icon: Briefcase01Icon },
+          { name: "Blog", href: "/blog", descriptor: "Projects, product updates and R&D notes", icon: BookOpen01Icon },
+          { name: "Contact", href: "/contact", descriptor: "Start a project or ask a question", icon: Mail01Icon },
+        ],
+      },
     ],
   },
-];
-
-/** Top-level nav (Contact is rendered separately as a filled CTA). */
-export const primaryNav: NavItem[] = [
-  { label: "Solutions", href: "/solutions" },
-  { label: "Products", href: "/products/certificate-tracker" },
-  { label: "About", href: "/about" },
-  { label: "Career", href: "/careers" },
-  { label: "Blog", href: "/blog" },
 ];

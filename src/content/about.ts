@@ -36,10 +36,3 @@ export const growItems = [
   { letter: "O", label: "Organizational Development Services" },
   { letter: "W", label: "Workflow Enhancement Solutions" },
 ];
-
-export const leaders = [
-  { name: "Tosin Adetutu", role: "President", photo: "/team/tosin-adetutu.png" },
-  { name: "Kodjo Bolouvi", role: "Architectural Designer", photo: "/team/kodjo-bolouvi.png" },
-  { name: "Marina Shenoda", role: "VP, Business Development", photo: "/team/marina-shenoda.png" },
-  { name: "Ohioma Eboreime", role: "VP, Engineering", photo: "/team/ohioma-eboreime.png" },
-];

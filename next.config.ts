@@ -18,7 +18,7 @@ const nextConfig: NextConfig = {
       "/digital-transformation-consulting": "/solutions/digital-transformation",
       "/software-development-engineering": "/solutions/software-development",
       "/data-analytics-business-intelligence-consulting": "/solutions/data-analytics",
-      "/blog/process-guide": "/blog",
+      "/blog/process-guide": "/blog/engineering-approvals-new-jersey",
       "/team-members/:slug": "/about",
     };
     return Object.entries(legacy).map(([source, destination]) => ({ source, destination, permanent: true }));

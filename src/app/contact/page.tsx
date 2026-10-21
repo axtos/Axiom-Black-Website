@@ -1,62 +1,67 @@
 import Container from "@/components/ui/Container";
-import Icon from "@/components/ui/Icon";
-import { BuildingIcon } from "@hugeicons/core-free-icons";
+import Eyebrow from "@/components/ui/Eyebrow";
 import ContactForm from "@/components/contact/ContactForm";
-import Stats from "@/components/sections/Stats";
-import { trustedLogos } from "@/content/home";
-import { pageMeta } from "@/lib/seo";
+import { Mail01Icon } from "@hugeicons/core-free-icons";
+import { SITE, pageMeta } from "@/lib/seo";
 
 export const metadata = pageMeta({
-  title: "Contact: Book a demo",
+  title: "Contact: Start a project",
   description:
-    "Book a 30-minute conversation with Axiom Black about your organization and where we can make the biggest impact.",
+    "Tell Axiom Black about your water system, infrastructure project or technology need. Newark, NJ office open Monday to Friday, 9 AM to 6 PM.",
   path: "/contact",
 });
 
+const MAP_URL = "https://www.google.com/maps/search/?api=1&query=511+South+Orange+Ave+Newark+NJ+07103";
+
 export default function ContactPage() {
   return (
-    <>
-      <section>
-        <Container className="pt-[140px] md:pt-[170px]">
-          <div className="grid gap-14 lg:grid-cols-2">
-            {/* Form */}
-            <div className="order-2 lg:order-1">
-              <ContactForm />
-            </div>
+    <section className="pb-24 md:pb-32">
+      <Container className="pt-[140px] md:pt-[170px]">
+        <div className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr]">
+          <div>
+            <Eyebrow icon={Mail01Icon}>Contact</Eyebrow>
+            <h1 className="mt-6 max-w-[14ch] text-[clamp(36px,5vw,64px)] font-medium leading-[1.03] tracking-[-0.03em] text-ink">
+              Start a project with Axiom Black.
+            </h1>
+            <p className="mt-6 max-w-[46ch] text-[17px] leading-relaxed text-body">
+              Tell us about your system, project or technology need, and we&apos;ll get back to you to
+              set up a conversation.
+            </p>
 
-            {/* Copy + calendar + trusted */}
-            <div className="order-1 lg:order-2">
-              <h1 className="text-[clamp(32px,4.5vw,56px)] font-black uppercase leading-[1.02] tracking-[-0.01em] text-ink">
-                Book a demo with Axiom Black
-              </h1>
-              <p className="mt-4 max-w-[52ch] text-[17px] leading-relaxed text-body">
-                A 30-minute conversation about your organization and where Axiom Black can make the biggest impact.
-              </p>
-
-              {/* calendar / scheduling embed placeholder */}
-              <div className="mt-8 flex aspect-[16/10] w-full items-center justify-center border border-line bg-[#eaeaea] text-[13px] font-medium uppercase tracking-widest text-muted">
-                Scheduling embed placeholder
+            <dl className="mt-12 border-t border-line">
+              <div className="grid gap-1 border-b border-line py-5 sm:grid-cols-[140px_1fr]">
+                <dt className="text-[14px] text-muted">Office</dt>
+                <dd className="text-[15px] text-ink">
+                  511 South Orange Ave #2238
+                  <br />
+                  Newark, NJ 07103
+                  <br />
+                  <a href={MAP_URL} target="_blank" rel="noopener noreferrer" className="mt-1 inline-block text-[14px] text-body underline underline-offset-4 hover:text-ink">
+                    Open in Google Maps
+                  </a>
+                </dd>
               </div>
-
-              <p className="mt-8 text-[12px] font-semibold uppercase tracking-[0.16em] text-muted">
-                Trusted by 1000+ businesses
-              </p>
-              <div className="mt-4 flex flex-wrap items-center gap-x-8 gap-y-3">
-                {trustedLogos.map((name) => (
-                  <span key={name} className="inline-flex items-center gap-2 text-[15px] font-medium text-ink/80">
-                    <Icon icon={BuildingIcon} size={20} className="text-ink/50" strokeWidth={1.6} />
-                    {name}
-                  </span>
-                ))}
+              <div className="grid gap-1 border-b border-line py-5 sm:grid-cols-[140px_1fr]">
+                <dt className="text-[14px] text-muted">Hours</dt>
+                <dd className="text-[15px] text-ink">Monday to Friday, 9:00 AM to 6:00 PM</dd>
               </div>
-            </div>
+              <div className="grid gap-1 border-b border-line py-5 sm:grid-cols-[140px_1fr]">
+                <dt className="text-[14px] text-muted">Email</dt>
+                <dd className="text-[15px]"><a href={`mailto:${SITE.email}`} className="text-ink hover:underline">{SITE.email}</a></dd>
+              </div>
+              <div className="grid gap-1 border-b border-line py-5 sm:grid-cols-[140px_1fr]">
+                <dt className="text-[14px] text-muted">Phone</dt>
+                <dd className="text-[15px]"><a href="tel:+18624209525" className="text-ink hover:underline">+1 (862) 420 9525</a></dd>
+              </div>
+            </dl>
           </div>
-        </Container>
-      </section>
 
-      <div className="mt-24 md:mt-28">
-        <Stats />
-      </div>
-    </>
+          <div className="border border-line bg-surface-2 p-7 md:p-10">
+            <h2 className="mb-8 text-[22px] font-medium text-ink">Send us a message</h2>
+            <ContactForm />
+          </div>
+        </div>
+      </Container>
+    </section>
   );
 }

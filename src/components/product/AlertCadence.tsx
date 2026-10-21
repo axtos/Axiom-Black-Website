@@ -16,7 +16,7 @@ export default function AlertCadence({ data }: { data: ProductPage["alerts"] }) 
         <div className="mt-12 grid gap-5 md:grid-cols-3">
           {data.steps.map((s, i) => (
             <Reveal key={s.when} delay={i * 0.06}>
-              <div className="relative h-full border border-line bg-white px-7 pb-8 pt-7">
+              <div className="relative h-full border border-line bg-surface-2 px-7 pb-8 pt-7">
                 <span className="inline-flex items-center border border-line bg-surface-2 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
                   {s.channel}
                 </span>
