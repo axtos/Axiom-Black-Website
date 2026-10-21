@@ -34,7 +34,13 @@ const cols: { title: string; links: { label: string; href: string }[] }[] = [
   { title: "Legal", links: [{ label: "Privacy", href: "/privacy" }, { label: "Terms", href: "/terms" }] },
 ];
 
-const socials = [Linkedin02Icon, NewTwitterIcon, InstagramIcon];
+/* Only profiles with a real URL render. Fill in hrefs as accounts go live. */
+const socials: { label: string; icon: typeof Linkedin02Icon; href?: string }[] = [
+  { label: "LinkedIn", icon: Linkedin02Icon },
+  { label: "X", icon: NewTwitterIcon },
+  { label: "Instagram", icon: InstagramIcon },
+];
+const liveSocials = socials.filter((s) => s.href);
 
 export default function Footer() {
   return (
@@ -52,18 +58,20 @@ export default function Footer() {
               <br />
               Newark, NJ 07103.
             </p>
-            <div className="mt-6 flex gap-2.5">
-              {socials.map((s, i) => (
+            {liveSocials.length > 0 && <div className="mt-6 flex gap-2.5">
+              {liveSocials.map((s) => (
                 <a
-                  key={i}
-                  href="#"
-                  aria-label="social"
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
                   className="flex h-10 w-10 items-center justify-center rounded-none bg-white text-ink shadow-[0_1px_2px_rgba(0,0,0,0.04)] ring-1 ring-line transition-colors hover:bg-ink hover:text-white"
                 >
-                  <Icon icon={s} size={18} strokeWidth={1.8} />
+                  <Icon icon={s.icon} size={18} strokeWidth={1.8} />
                 </a>
               ))}
-            </div>
+            </div>}
           </div>
 
           {cols.map((c) => (

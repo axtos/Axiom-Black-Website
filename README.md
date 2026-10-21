@@ -34,3 +34,9 @@ fallback until then.
 
 Phase 0 — Foundation scaffold: tokens, fonts, animation stack, redirects,
 token-check homepage. Next: component library + real Home (Phase 1).
+
+## Contact form
+
+Submissions are emailed through [Resend](https://resend.com) by a server action
+(`src/app/contact/actions.ts`). Copy `.env.example` to `.env.local` for local use and
+set the same variables in Vercel. Verify the sending domain in Resend before launch.
