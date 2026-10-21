@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState, useEffect } from "react";
+import Link from "next/link";
 import { track } from "@vercel/analytics";
 import Icon from "@/components/ui/Icon";
 import { ArrowRight01Icon } from "@hugeicons/core-free-icons";
@@ -73,6 +74,10 @@ export default function ContactForm() {
           <a href="mailto:info@axiomblack.com" className="underline">info@axiomblack.com</a>.
         </p>
       )}
+      <p className="text-[13px] leading-relaxed text-muted">
+        We use these details only to respond to you. See our{" "}
+        <Link href="/privacy" className="underline underline-offset-2 hover:text-ink">Privacy Policy</Link>.
+      </p>
       <button type="submit" disabled={pending} className="ab-btn group disabled:opacity-60">
         <span>{pending ? "Sending…" : "Send message"}</span>
         <span className="inline-flex h-6 w-6 items-center justify-center rounded-[7px] border border-black/25 transition-transform group-hover:translate-x-[2px]">
