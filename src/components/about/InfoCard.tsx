@@ -16,8 +16,8 @@ export default function InfoCard({
 }) {
   return (
     <div className={cn("relative border border-line bg-surface-2", className)}>
-      <span className="absolute left-0 top-0 flex h-14 w-14 items-center justify-center bg-ink text-white">
-        {icon ? <Icon icon={icon} size={26} className="text-white" strokeWidth={1.7} /> : <HubIcon size={56} className="text-white" />}
+      <span className="absolute left-0 top-0 flex h-14 w-14 items-center justify-center bg-ink text-surface">
+        {icon ? <Icon icon={icon} size={26} className="text-surface" strokeWidth={1.7} /> : <HubIcon size={56} className="text-surface" />}
       </span>
       <div className="px-7 pb-7 pt-[76px]">
         <h3 className="text-[22px] font-medium leading-snug tracking-[-0.01em] text-ink">{title}</h3>

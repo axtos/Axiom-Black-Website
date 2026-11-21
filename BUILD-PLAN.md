@@ -1,5 +1,11 @@
 # Axiom Black — Website Build Plan
 
+> **Decisions since this plan (Oct 2026):** black canvas confirmed (the white Figma theme was dropped);
+> navigation is three menus, Engineering · Technology · Company, not six flat links; content is typed
+> TypeScript data in `src/content/` rather than MDX; Framer Motion was removed in favour of CSS
+> scroll-driven reveals; AxiomLabs research projects stay as pages for now and move into the blog as
+> R&D posts later. Live status is on the Website Build Board.
+
 **Stack:** Next.js (App Router, latest) + Tailwind CSS v4 + TypeScript
 **Deploy:** Vercel (free tier), custom domain, global CDN, HTTPS
 **Source of truth:** `axiom-redesign-brief.pdf` (scope/IA) · `axiomblack-design_system.md` (visual system) · Figma `Axiom Black UI`

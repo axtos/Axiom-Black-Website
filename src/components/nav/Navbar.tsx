@@ -1,30 +1,30 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { ArrowDown01Icon, Cancel01Icon, Menu01Icon } from "@hugeicons/core-free-icons";
+import { useEffect, useRef, useState } from "react";
+import { ArrowDown01Icon, ArrowRight01Icon, Cancel01Icon, Menu01Icon } from "@hugeicons/core-free-icons";
 import Icon from "@/components/ui/Icon";
 import Wordmark from "./Wordmark";
-import SolutionsMenu from "./SolutionsMenu";
-import ProductMenu from "./ProductMenu";
-import CompanyMenu from "./CompanyMenu";
-import AccentBadge from "@/components/ui/AccentBadge";
-import { solutionGroups } from "@/content/solutions";
-import { productNav } from "@/content/products";
+import { navMenus, type NavMenu } from "@/content/nav";
+import { cn } from "@/lib/cn";
 
-const productLinks = productNav.map((p) => ({ label: p.name, href: p.href, status: p.status }));
+const accentColor: Record<NavMenu["accent"], string> = {
+  blue: "#0049ED",
+  orange: "#FF8710",
+  none: "#ffffff",
+};
 
-const companyLinks = [
-  { label: "About", href: "/about" },
-  { label: "Career", href: "/careers" },
-  { label: "Blog", href: "/blog" },
-];
-
+/**
+ * Three menus (Engineering, Technology, Company). Every menu link is always in
+ * the HTML so crawlers and assistive tech see it; closed menus are hidden with
+ * `visibility`, which also takes them out of the tab order. Opens on hover or
+ * click, closes on Escape, outside click, or focus leaving the menu.
+ */
 export default function Navbar() {
-  const [open, setOpen] = useState(false); // mobile
-  const [menu, setMenu] = useState<null | "product" | "solutions" | "company">(null);
+  const [open, setOpen] = useState<NavMenu["id"] | null>(null);
+  const [mobile, setMobile] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -34,153 +34,182 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
+    document.body.style.overflow = mobile ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
+  }, [mobile]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      document.getElementById(`nav-trigger-${open}`)?.focus();
+      setOpen(null);
+    };
+    const onClick = (e: MouseEvent) => {
+      if (!navRef.current?.contains(e.target as Node)) setOpen(null);
+    };
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("mousedown", onClick);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("mousedown", onClick);
+    };
   }, [open]);
 
-  const solid = scrolled || menu !== null;
+  const solid = scrolled || open !== null || mobile;
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-        solid ? "border-b border-line bg-white/80 backdrop-blur-xl" : "bg-transparent"
-      }`}
+      className={cn(
+        "fixed inset-x-0 top-0 z-50 transition-colors duration-300",
+        solid ? "border-b border-line bg-black/85 backdrop-blur-xl" : "border-b border-transparent bg-transparent"
+      )}
     >
       <div className="relative mx-auto flex h-[78px] w-full max-w-[1284px] items-center justify-between px-6 md:px-10 lg:px-14">
-        <Wordmark height={38} />
+        <Wordmark height={34} />
 
-        <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 lg:flex">
-          {/* Product dropdown */}
-          <div className="relative" onMouseEnter={() => setMenu("product")} onMouseLeave={() => setMenu(null)}>
-            <button
-              type="button"
-              onClick={() => setMenu((m) => (m === "product" ? null : "product"))}
-              aria-expanded={menu === "product"}
-              className="inline-flex items-center gap-1.5 text-[17px] font-medium tracking-[-0.01em] text-ink transition-colors hover:text-ink/60"
-            >
-              Product
-              <Icon icon={ArrowDown01Icon} size={16} className={`text-ink/50 transition-transform ${menu === "product" ? "rotate-180" : ""}`} strokeWidth={2} />
-            </button>
-            <AnimatePresence>
-              {menu === "product" && (
-                <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.18 }} className="absolute left-0 top-full pt-3">
-                  <ProductMenu onNavigate={() => setMenu(null)} />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-
-          {/* Solutions dropdown */}
-          <div className="relative" onMouseEnter={() => setMenu("solutions")} onMouseLeave={() => setMenu(null)}>
-            <button
-              type="button"
-              onClick={() => setMenu((m) => (m === "solutions" ? null : "solutions"))}
-              aria-expanded={menu === "solutions"}
-              className="inline-flex items-center gap-1.5 text-[17px] font-medium tracking-[-0.01em] text-ink transition-colors hover:text-ink/60"
-            >
-              Solutions
-              <Icon icon={ArrowDown01Icon} size={16} className={`text-ink/50 transition-transform ${menu === "solutions" ? "rotate-180" : ""}`} strokeWidth={2} />
-            </button>
-            <AnimatePresence>
-              {menu === "solutions" && (
-                <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.18 }} className="absolute left-0 top-full pt-3">
-                  <SolutionsMenu onNavigate={() => setMenu(null)} />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-
-          {/* Company dropdown */}
-          <div className="relative" onMouseEnter={() => setMenu("company")} onMouseLeave={() => setMenu(null)}>
-            <button
-              type="button"
-              onClick={() => setMenu((m) => (m === "company" ? null : "company"))}
-              aria-expanded={menu === "company"}
-              className="inline-flex items-center gap-1.5 text-[17px] font-medium tracking-[-0.01em] text-ink transition-colors hover:text-ink/60"
-            >
-              Company
-              <Icon icon={ArrowDown01Icon} size={16} className={`text-ink/50 transition-transform ${menu === "company" ? "rotate-180" : ""}`} strokeWidth={2} />
-            </button>
-            <AnimatePresence>
-              {menu === "company" && (
-                <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.18 }} className="absolute right-0 top-full pt-3">
-                  <CompanyMenu onNavigate={() => setMenu(null)} />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+        <nav ref={navRef} aria-label="Main" className="absolute left-1/2 hidden -translate-x-1/2 lg:block">
+          <ul className="flex items-center gap-9">
+            {navMenus.map((m) => {
+              const isOpen = open === m.id;
+              return (
+                <li
+                  key={m.id}
+                  className="relative"
+                  onMouseEnter={() => setOpen(m.id)}
+                  onMouseLeave={() => setOpen(null)}
+                  onBlur={(e) => {
+                    if (!e.currentTarget.contains(e.relatedTarget as Node)) setOpen((o) => (o === m.id ? null : o));
+                  }}
+                >
+                  <button
+                    id={`nav-trigger-${m.id}`}
+                    type="button"
+                    aria-expanded={isOpen}
+                    aria-controls={`nav-menu-${m.id}`}
+                    onClick={() => setOpen(isOpen ? null : m.id)}
+                    className="inline-flex items-center gap-1.5 py-2 text-[16px] font-medium tracking-[-0.01em] text-ink transition-colors hover:text-ink/70"
+                  >
+                    {m.label}
+                    <Icon icon={ArrowDown01Icon} size={15} className={cn("text-muted transition-transform", isOpen && "rotate-180")} strokeWidth={2} />
+                  </button>
+                  <div
+                    id={`nav-menu-${m.id}`}
+                    className={cn(
+                      "absolute top-full pt-3 transition duration-150",
+                      m.id === "company" ? "right-0" : "left-1/2 -translate-x-1/2",
+                      isOpen ? "visible translate-y-0 opacity-100" : "invisible translate-y-1 opacity-0"
+                    )}
+                  >
+                    <MenuPanel menu={m} onNavigate={() => setOpen(null)} />
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
         </nav>
 
         <div className="flex items-center gap-3">
-          <Link
-            href="/contact"
-            className="hidden items-center rounded-[10px] bg-ink px-5 py-2.5 text-[16px] font-medium tracking-[-0.01em] text-white transition-opacity hover:opacity-85 sm:inline-flex"
-          >
-            Contact sales
+          <Link href="/contact" className="ab-btn hidden !px-5 !py-2.5 sm:inline-flex">
+            Start a project
           </Link>
           <button
             type="button"
-            aria-label="Menu"
-            aria-expanded={open}
-            onClick={() => setOpen((v) => !v)}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-[10px] text-ink lg:hidden"
+            aria-label={mobile ? "Close menu" : "Open menu"}
+            aria-expanded={mobile}
+            aria-controls="mobile-nav"
+            onClick={() => setMobile((v) => !v)}
+            className="inline-flex h-10 w-10 items-center justify-center text-ink lg:hidden"
           >
-            <Icon icon={open ? Cancel01Icon : Menu01Icon} size={22} strokeWidth={2} />
+            <Icon icon={mobile ? Cancel01Icon : Menu01Icon} size={22} strokeWidth={2} />
           </button>
         </div>
       </div>
 
-      {/* Mobile menu */}
-      <AnimatePresence>
-        {open && (
-          <motion.nav
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-x-0 top-[78px] z-40 max-h-[calc(100dvh-78px)] overflow-y-auto border-t border-line bg-white/95 backdrop-blur-xl lg:hidden"
-          >
-            <div className="mx-auto w-full max-w-[1284px] px-6 py-5">
-              <div className="mb-2">
-                <p className="px-3 pb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">Product</p>
-                {productLinks.map((l) => (
-                  <Link key={l.href} href={l.href} onClick={() => setOpen(false)} className="flex flex-wrap items-center gap-2 rounded-[10px] px-3 py-3 text-[17px] font-medium text-ink hover:bg-surface-2">
-                    {l.label}
-                    {l.status && (
-                      <span className="border border-line bg-surface-2 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-muted">{l.status}</span>
-                    )}
-                  </Link>
-                ))}
-              </div>
-
-              {solutionGroups.map((g) => (
-                <div key={g.label} className="mt-4">
-                  <p className="px-3 pb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">{g.label}</p>
-                  <ul>
-                    {g.items.map((it) => (
-                      <li key={it.href}>
-                        <Link href={it.href} onClick={() => setOpen(false)} className="flex items-center gap-3 rounded-[10px] px-3 py-2.5 hover:bg-surface-2">
-                          <AccentBadge icon={it.icon} accent={g.accent} size={34} />
-                          <span className="text-[16px] font-medium text-ink">{it.name}</span>
-                        </Link>
-                      </li>
+      {/* Mobile: one accordion per menu */}
+      <nav
+        id="mobile-nav"
+        aria-label="Main"
+        hidden={!mobile}
+        className="fixed inset-x-0 top-[78px] z-40 h-[calc(100dvh-78px)] overflow-y-auto border-t border-line bg-black lg:hidden"
+      >
+        <div className="mx-auto w-full max-w-[1284px] px-6 py-4">
+          {navMenus.map((m) => (
+            <details key={m.id} className="group border-b border-line">
+              <summary className="flex cursor-pointer list-none items-center justify-between py-4 text-[18px] font-medium text-ink [&::-webkit-details-marker]:hidden">
+                <span className="inline-flex items-center gap-3">
+                  <span aria-hidden="true" className="h-2 w-2" style={{ background: accentColor[m.accent] }} />
+                  {m.label}
+                </span>
+                <Icon icon={ArrowDown01Icon} size={18} className="text-muted transition-transform group-open:rotate-180" strokeWidth={2} />
+              </summary>
+              <div className="pb-4">
+                {m.sections.map((s, i) => (
+                  <div key={i} className={i > 0 ? "mt-3" : undefined}>
+                    {s.label && <p className="px-1 pb-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">{s.label}</p>}
+                    {s.links.map((l) => (
+                      <Link key={l.href} href={l.href} onClick={() => setMobile(false)} className="block px-1 py-2.5 text-[16px] text-ink-soft hover:text-ink">
+                        {l.name}
+                      </Link>
                     ))}
-                  </ul>
-                </div>
-              ))}
-
-              <div className="mt-4 border-t border-line pt-2">
-                <p className="px-3 pb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">Company</p>
-                {companyLinks.map((l) => (
-                  <Link key={l.href} href={l.href} onClick={() => setOpen(false)} className="block rounded-[10px] px-3 py-3 text-[17px] font-medium text-ink hover:bg-surface-2">{l.label}</Link>
+                  </div>
                 ))}
+                {m.overview && (
+                  <Link href={m.overview.href} onClick={() => setMobile(false)} className="mt-2 block px-1 py-2.5 text-[14px] text-muted hover:text-ink">
+                    {m.overview.label} →
+                  </Link>
+                )}
               </div>
-
-              <Link href="/contact" onClick={() => setOpen(false)} className="mt-3 block rounded-[10px] bg-ink px-3 py-3 text-center text-[15px] font-semibold text-white">Contact sales</Link>
-            </div>
-          </motion.nav>
-        )}
-      </AnimatePresence>
+            </details>
+          ))}
+          <Link href="/contact" onClick={() => setMobile(false)} className="ab-btn mt-6 w-full justify-center">
+            Start a project
+          </Link>
+        </div>
+      </nav>
     </header>
+  );
+}
+
+function MenuPanel({ menu, onNavigate }: { menu: NavMenu; onNavigate: () => void }) {
+  const wide = menu.sections.length > 1;
+  return (
+    <div
+      className={cn(
+        "overflow-hidden border border-line bg-surface-2 shadow-[0_24px_64px_rgba(0,0,0,0.6)]",
+        wide ? "w-[680px]" : "w-[380px]",
+        "max-w-[92vw]"
+      )}
+      style={{ borderTop: `2px solid ${accentColor[menu.accent]}` }}
+    >
+      <div className={cn("grid", wide && "grid-cols-2 divide-x divide-line")}>
+        {menu.sections.map((s, i) => (
+          <div key={i} className="p-4">
+            {s.label && <p className="px-3 pb-2 pt-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">{s.label}</p>}
+            <ul>
+              {s.links.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} onClick={onNavigate} className="flex items-start gap-3.5 px-3 py-2.5 transition-colors hover:bg-surface-3 focus-visible:bg-surface-3">
+                    <span className="mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center border border-line" style={{ color: accentColor[menu.accent] }}>
+                      <Icon icon={l.icon} size={18} strokeWidth={1.8} />
+                    </span>
+                    <span>
+                      <span className="block text-[15px] font-medium text-ink">{l.name}</span>
+                      <span className="mt-0.5 block max-w-[32ch] text-[13px] leading-relaxed text-body">{l.descriptor}</span>
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+      {menu.overview && (
+        <Link href={menu.overview.href} onClick={onNavigate} className="flex items-center justify-between border-t border-line px-7 py-3.5 text-[14px] font-medium text-ink-soft transition-colors hover:bg-surface-3 hover:text-ink">
+          {menu.overview.label}
+          <Icon icon={ArrowRight01Icon} size={15} strokeWidth={2} />
+        </Link>
+      )}
+    </div>
   );
 }

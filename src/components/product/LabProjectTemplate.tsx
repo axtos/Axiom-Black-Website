@@ -1,3 +1,4 @@
+import WireframeCube from "@/components/motif/WireframeCube";
 import Container from "@/components/ui/Container";
 import Eyebrow from "@/components/ui/Eyebrow";
 import Reveal from "@/components/sections/Reveal";
@@ -47,9 +48,9 @@ export default function LabProjectTemplate({ project: p }: { project: LabProject
                 <SecondaryButton href="/solutions">See Our Solutions</SecondaryButton>
               </div>
             </div>
-            <div className="flex aspect-[4/3] w-full items-center justify-center bg-[#767676] text-[13px] font-medium uppercase tracking-widest text-white/70">
-              Concept diagram placeholder
-            </div>
+            <div className="relative aspect-[4/3] w-full max-w-full">
+            <WireframeCube accent={"orange"} className="absolute inset-0 h-full w-full" />
+          </div>
           </div>
         </Container>
       </section>
@@ -97,8 +98,8 @@ export default function LabProjectTemplate({ project: p }: { project: LabProject
             <ul className="border-t border-line">
               {p.who.items.map((it) => (
                 <li key={it} className="flex items-start gap-4 border-b border-line py-5">
-                  <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center bg-ink text-white">
-                    <Icon icon={Tick02Icon} size={14} className="text-white" strokeWidth={2.4} />
+                  <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center bg-ink text-surface">
+                    <Icon icon={Tick02Icon} size={14} className="text-surface" strokeWidth={2.4} />
                   </span>
                   <span className="text-[17px] leading-snug text-ink">{it}</span>
                 </li>
@@ -111,7 +112,7 @@ export default function LabProjectTemplate({ project: p }: { project: LabProject
       {/* Where it stands */}
       <section className="py-24 md:py-28">
         <Container>
-          <div className="border border-line bg-white px-7 py-12 md:px-14 md:py-16">
+          <div className="border border-line bg-surface-2 px-7 py-12 md:px-14 md:py-16">
             <Eyebrow icon={WorkflowSquare03Icon}>{p.stage.eyebrow}</Eyebrow>
             <h2 className="ab-h2 mt-5 max-w-[26ch]">{p.stage.headline}</h2>
             <p className="mt-6 max-w-[70ch] text-[17px] leading-relaxed text-body">{p.stage.body}</p>

@@ -34,8 +34,8 @@ export default function SolutionCard({
       )}
     >
       {/* badge flush to the corner */}
-      <span className="absolute left-0 top-0 flex h-14 w-14 items-center justify-center bg-ink text-white">
-        {icon ? <Icon icon={icon} size={26} className="text-white" strokeWidth={1.7} /> : <HubIcon size={56} className="text-white" />}
+      <span className="absolute left-0 top-0 flex h-14 w-14 items-center justify-center bg-ink text-surface">
+        {icon ? <Icon icon={icon} size={26} className="text-surface" strokeWidth={1.7} /> : <HubIcon size={56} className="text-surface" />}
       </span>
 
       <div className="px-7 pb-7 pt-[76px]">

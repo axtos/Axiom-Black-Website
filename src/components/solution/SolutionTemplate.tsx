@@ -8,9 +8,11 @@ import SolutionCard from "@/components/cards/SolutionCard";
 import SolutionHero from "./SolutionHero";
 import FeatureBand from "./FeatureBand";
 import ProcessCard from "./ProcessCard";
-import { DashboardSquare02Icon, WorkflowSquare03Icon, LinkSquare02Icon } from "@hugeicons/core-free-icons";
+import { DashboardSquare02Icon, WorkflowSquare03Icon, LinkSquare02Icon, TaskDone01Icon } from "@hugeicons/core-free-icons";
 import type { SolutionPage } from "@/content/solutionPages";
 import { solutionGroups } from "@/content/solutions";
+import JsonLd from "@/components/JsonLd";
+import { faqSchema, serviceSchema } from "@/lib/seo";
 
 /** Related cards carry only a href — look their icon up from the nav taxonomy. */
 const iconByHref = new Map(
@@ -18,9 +20,11 @@ const iconByHref = new Map(
 );
 
 export default function SolutionTemplate({ page }: { page: SolutionPage }) {
+  const { accent } = page;
   return (
     <>
-      <SolutionHero hero={page.hero} />
+      <JsonLd data={[serviceSchema(page), faqSchema(page.faq.items)]} />
+      <SolutionHero hero={page.hero} accent={accent} />
 
       {/* Capabilities */}
       <section className="py-24 md:py-28">
@@ -40,7 +44,24 @@ export default function SolutionTemplate({ page }: { page: SolutionPage }) {
         </Container>
       </section>
 
-      <FeatureBand data={page.difference} />
+      {page.services && (
+        <section className="border-t border-line py-24 md:py-28">
+          <Container>
+            <Eyebrow icon={TaskDone01Icon}>{page.services.eyebrow}</Eyebrow>
+            <h2 className="ab-h2 mt-5 max-w-[28ch]">{page.services.headline}</h2>
+            <dl className="mt-12 grid gap-x-12 sm:grid-cols-2 lg:grid-cols-3">
+              {page.services.items.map((s) => (
+                <div key={s.title} className="border-t border-line py-6">
+                  <dt className="text-[17px] font-medium text-ink">{s.title}</dt>
+                  <dd className="mt-2 max-w-[40ch] text-[15px] leading-relaxed text-body">{s.body}</dd>
+                </div>
+              ))}
+            </dl>
+          </Container>
+        </section>
+      )}
+
+      <FeatureBand data={page.difference} accent={accent} />
 
       {/* Process */}
       <section className="py-24 md:py-28">

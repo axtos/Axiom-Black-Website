@@ -55,7 +55,7 @@ export const certificateTracker: ProductPage = {
     eyebrow: "AxiomLabs · Certificate Tracker",
     headline: "Never miss a certificate expiry again.",
     sub: "Certificate Tracker keeps every licence, safety cert, insurance document, and permit in one place, and warns the right people at 30, 14, and 7 days before it lapses. Your team stays audit-ready without anyone maintaining a spreadsheet.",
-    primaryCta: { label: "Get Started Free", href: "https://axiomtracker.vercel.app/" },
+    primaryCta: { label: "Get Started Free", href: "https://www.licensage.com" },
     secondaryCta: { label: "Talk to Our Team", href: "/contact" },
   },
   problem: {
@@ -153,7 +153,7 @@ export const certificateTracker: ProductPage = {
     eyebrow: "Get started",
     headline: "Ready to eliminate compliance risk?",
     sub: "Start simplifying your compliance workflow today, and deal with renewals before they turn into findings.",
-    cta: { label: "Get Started Free", href: "https://axiomtracker.vercel.app/" },
+    cta: { label: "Get Started Free", href: "https://www.licensage.com" },
   },
 };
 
@@ -346,26 +346,3 @@ export const labProjects: Record<string, LabProject> = {
     },
   },
 };
-
-/** Single source of truth for the Product dropdown, mobile nav, and footer. */
-export const productNav: {
-  name: string;
-  href: string;
-  descriptor: string;
-  icon: IconSvgElement;
-  status?: string;
-}[] = [
-  {
-    name: "Certificate Tracker",
-    href: "/products/certificate-tracker",
-    descriptor: "Track licences, certs, and compliance deadlines in one place",
-    icon: Certificate01Icon,
-  },
-  ...Object.values(labProjects).map((l) => ({
-    name: l.name,
-    href: `/products/${l.slug}`,
-    descriptor: l.descriptor,
-    icon: l.navIcon,
-    status: l.status,
-  })),
-];

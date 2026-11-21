@@ -2,13 +2,26 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   async redirects() {
-    // Legacy Framer URLs → new /solutions/* structure (brief §4.3).
-    // Audit the live site before launch and extend this list.
-    return [
-      { source: "/water-page-axiom-black", destination: "/solutions/water", permanent: true },
-      { source: "/open-position", destination: "/careers", permanent: true },
-      { source: "/risk-management-software-system", destination: "/solutions/risk-assessment", permanent: true },
-    ];
+    // Legacy Framer URLs (from the live sitemap) → new structure.
+    const legacy: Record<string, string> = {
+      "/about-axiom-black": "/about",
+      "/axiom-labs": "/products/certificate-tracker",
+      "/open-position": "/careers",
+      "/term-of-service": "/terms",
+      "/privacy-statement": "/privacy",
+      "/contact-page": "/contact",
+      "/water-page-axiom-black": "/solutions/water",
+      "/design": "/solutions/design",
+      "/modelling-and-simulation": "/solutions/modeling",
+      "/risk-management-software-system": "/solutions/risk-assessment",
+      "/artificial-intelligence": "/solutions/ai-machine-learning",
+      "/digital-transformation-consulting": "/solutions/digital-transformation",
+      "/software-development-engineering": "/solutions/software-development",
+      "/data-analytics-business-intelligence-consulting": "/solutions/data-analytics",
+      "/blog/process-guide": "/blog/engineering-approvals-new-jersey",
+      "/team-members/:slug": "/about",
+    };
+    return Object.entries(legacy).map(([source, destination]) => ({ source, destination, permanent: true }));
   },
 };
 

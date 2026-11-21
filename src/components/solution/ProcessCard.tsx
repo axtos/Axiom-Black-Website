@@ -15,7 +15,7 @@ export default function ProcessCard({
     <div className="relative min-h-[340px] border border-line bg-surface-2">
       <span
         className={cn(
-          "absolute top-0 flex h-14 min-w-14 items-center justify-center bg-ink px-3 font-mono text-[22px] tracking-tight text-white",
+          "absolute top-0 flex h-14 min-w-14 items-center justify-center bg-ink px-3 font-mono text-[22px] tracking-tight text-surface",
           side === "left" ? "left-0" : "right-0"
         )}
       >

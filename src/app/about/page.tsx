@@ -4,15 +4,15 @@ import Reveal from "@/components/sections/Reveal";
 import Cta from "@/components/sections/Cta";
 import InfoCard from "@/components/about/InfoCard";
 import GrowCard from "@/components/about/GrowCard";
-import LeaderCard from "@/components/about/LeaderCard";
-import { DashboardSquare02Icon, BookOpen01Icon, WorkflowSquare03Icon, UserGroupIcon } from "@hugeicons/core-free-icons";
+import Registrations from "@/components/sections/Registrations";
+import { DashboardSquare02Icon, BookOpen01Icon, WorkflowSquare03Icon } from "@hugeicons/core-free-icons";
 import { pageMeta } from "@/lib/seo";
-import { aboutHero, missionVision, storyParas, storyCards, growItems, leaders } from "@/content/about";
+import { aboutHero, missionVision, storyParas, storyCards, growItems } from "@/content/about";
 
 export const metadata = pageMeta({
   title: "About: Two disciplines, one team",
   description:
-    "Axiom Black pairs licensed engineering with in-house technology under one roof, as a Newark, NJ partner to municipal utilities and public agencies. Our story, GROW framework, and leadership.",
+    "Axiom Black pairs licensed engineering with in-house technology under one roof, as a Newark, NJ partner to municipal utilities and public agencies. Our story, how we work, and our registrations.",
   path: "/about",
 });
 
@@ -85,27 +85,9 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      {/* Leadership */}
-      <section className="bg-surface-2 py-24 md:py-28">
-        <Container>
-          <Eyebrow icon={UserGroupIcon}>Leadership</Eyebrow>
-          <h2 className="mt-5 max-w-[18ch] text-[clamp(34px,5vw,56px)] font-medium leading-[1.02] tracking-[-0.03em] text-ink">
-            The people behind the work.
-          </h2>
-          <p className="mt-5 max-w-[46ch] text-[16px] leading-relaxed text-body">
-            Engineers, technologists, and consultants with deep roots in New Jersey&apos;s water sector.
-          </p>
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {leaders.map((l, i) => (
-              <Reveal key={i} delay={(i % 4) * 0.05}>
-                <LeaderCard name={l.name} role={l.role} photo={l.photo} />
-              </Reveal>
-            ))}
-          </div>
-        </Container>
-      </section>
+      <Registrations className="border-t border-line py-24 md:py-28" />
 
-      <Cta headline="Let’s build something that lasts." cta={{ label: "Start Your Project", href: "/contact" }} />
+      <Cta headline="Let’s build something that lasts." cta={{ label: "Start a project", href: "/contact" }} />
     </>
   );
 }

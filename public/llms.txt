@@ -1,0 +1,30 @@
+# Axiom Black
+
+> Axiom Black, LLC is an engineering and technology firm in Newark, New Jersey. It plans, designs, and modernizes water and wastewater infrastructure for municipal utilities, public works departments, and government agencies, and builds the software, data, and AI tools that run it.
+
+## Company facts
+- Legal name: Axiom Black, LLC (small business)
+- Address: 511 South Orange Ave #2238, Newark, NJ 07103, United States
+- Email: info@axiomblack.com · Phone: +1 (862) 420 9525
+- UEI: RVLSY6XUQ8F9 · CAGE: 9VQ00
+- NAICS: 541330, 513210, 541618, 541310, 541620, 541511, 541690, 541519, 541715, 541611, 611420
+- Funded-program experience: NJEIT (New Jersey I-Bank), USDA Rural Development
+
+## Engineering
+- [Water](https://axiomblack.com/solutions/water): distribution, treatment, lead service line programs, WQAA compliance, wells, pump stations, I&I studies
+- [Design](https://axiomblack.com/solutions/design): collection systems, lift stations, force mains
+- [Modeling](https://axiomblack.com/solutions/modeling): hydraulic modeling and simulation for utility networks
+- [Risk Assessment](https://axiomblack.com/solutions/risk-assessment): asset management and regulatory compliance
+
+## Technology
+- [AI & Machine Learning](https://axiomblack.com/solutions/ai-machine-learning): predictive maintenance from field and inspection data
+- [Digital Transformation](https://axiomblack.com/solutions/digital-transformation): cloud, IoT, and IT strategy for public agencies
+- [Data Analytics & BI](https://axiomblack.com/solutions/data-analytics): dashboards, reporting, decision support
+- [Software Development](https://axiomblack.com/solutions/software-development): custom applications and legacy modernization
+- [Certificate Tracker](https://axiomblack.com/products/certificate-tracker): tracks licences, certifications, insurance, and permits with expiry alerts
+
+## Company
+- [About](https://axiomblack.com/about)
+- [Careers](https://axiomblack.com/careers)
+- [Blog](https://axiomblack.com/blog)
+- [Contact](https://axiomblack.com/contact)
